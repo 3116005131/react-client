@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom"
-import App from './App'
 
 import logger from "redux-logger"
 import thunk from "redux-thunk"
@@ -11,11 +10,19 @@ import { Provider } from "react-redux"
 
 import rootReducer from "./reducers";
 
+import routes from "./routes";
+import { BrowserRouter as Router } from "react-router-dom"
+
+import NavigationBar from "./components/NavigationBar";
+
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(logger,thunk)))
 
 ReactDOM.render(
   <Provider store={ store }>
-    <App />
+    <Router routes = { routes }>
+      <NavigationBar></NavigationBar>
+      { routes }
+    </Router>
   </Provider>
   ,
   document.getElementById('root'));
